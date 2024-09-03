@@ -1,0 +1,222 @@
+body {
+    padding-top: 20px;
+    background-color: #1c1c1c;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    color: #E5E5E5;
+}
+
+h1 {
+    color: #4CAF50;
+    /* Un dorado brillante que resalta */
+    font-family: 'Poppins', sans-serif;
+    font-weight: 900;
+    /* Aumenta el grosor del texto */
+    font-size: 2em;
+    /* Tamaño de fuente grande */
+    text-align: center;
+    text-transform: uppercase;
+    /* Convierte todo el texto a mayúsculas */
+    letter-spacing: 2px;
+    /* Espaciado entre letras */
+    margin-bottom: 20px;
+    position: relative;
+}
+
+h1::before,
+h1::after {
+    content: "";
+    position: absolute;
+    width: 50px;
+    height: 5px;
+    background-color: transparent;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+h1::before {
+    left: 0;
+}
+
+h1::after {
+    right: 0;
+}
+
+h2 {
+    color: #E5E5E5;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    text-align: center;
+    font-size: 1.8em;
+    margin-bottom: 15px;
+}
+
+.form-horizontal {
+    display: flex;
+    flex-wrap: nowrap;
+    /* Asegura que los elementos no se envuelvan a la siguiente línea */
+    gap: 20px;
+    /* Espacio entre los divs */
+    max-width: 100%;
+    margin: auto;
+    padding: 10px;
+}
+
+.form-horizontal div {
+    display: flex;
+    flex-direction: column;
+    /* Elimina la expansión para ajustar al contenido */
+    flex: 0 1 auto;
+    /* Flex-grow: 0, Flex-shrink: 1, Flex-basis: auto */
+    min-width: 0;
+    /* Asegura que el contenido pueda reducirse si es necesario */
+    width: auto;
+    /* Ajusta el tamaño basado en el contenido */
+}
+
+.form-horizontal label {
+    color: #E5E5E5;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+.form-horizontal input {
+    background-color: #333;
+    border: 2px solid #444;
+    border-radius: 5px;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1em;
+    padding: 10px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+#signo {
+    width: 5ch;
+}
+
+#exponente {
+    width: 13ch;
+}
+
+#mantiza {
+    width: 28ch;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Centra el contenido horizontalmente */
+    justify-content: center;
+    width: 100%;
+    /* O usa un valor en píxeles como 300px */
+    max-width: 400px;
+    /* Asegura que ambos formularios tengan el mismo tamaño máximo */
+    margin: 0 auto;
+    /* Centra los formularios horizontalmente */
+    padding: 20px;
+    box-sizing: border-box;
+    /* Incluye el padding dentro del ancho total */
+}
+
+
+.converter-w {
+    display: flex;
+    justify-content: space-between;
+    /* Espacio uniforme entre los divs */
+    align-items: center;
+    /* Alinea verticalmente si es necesario */
+    gap: 20px;
+    /* Espacio entre los dos divs */
+}
+
+.converter-side-a,
+.converter-side-b {
+    flex: 1;
+    /* Ambos divs ocupan el mismo ancho */
+    max-width: 45%;
+    /* Opcional: asegura que no superen un ancho máximo */
+    box-sizing: border-box;
+    /* Incluye padding y borde dentro del ancho total */
+}
+
+.converter-wrapper {
+    background-color: #2b2b2b;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+    box-sizing: border-box;
+}
+
+
+.custom-button {
+    background-color: transparent;
+    border: 2px solid #4CAF50;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.2em;
+    font-weight: 700;
+    padding: 15px 20px;
+    margin-top: 20px;
+    width: 100%;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.custom-button:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+.custom-button2 {
+    background-color: transparent;
+    border: 2px solid #4CAF50;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.2em;
+    font-weight: 700;
+    padding: 15px 20px;
+    margin-top: 20px;
+    width: 60%;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.custom-button2:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+.converter-side-a,
+.converter-side-b {
+    display: inline-block;
+    width: 48%;
+    box-sizing: border-box;
+    margin-top: 10px;
+}
+
+
+@media (max-width: 600px) {
+
+    .converter-side-a,
+    .converter-side-b {
+        width: 100%;
+    }
+
+}
