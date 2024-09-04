@@ -6,9 +6,11 @@
 
         <div class="converter-wrapper">
             <form name="property_form">
-                <h1>Conversión de Coma Flotante a Decimal</h1>
+                <h1>Conversión de Coma Flotante IEEE 754 a Decimal</h1>
             </form>
             <form>
+                <RouterLink to="/infocd" class="custom-button">¿Cómo funciona la prueba?
+                </RouterLink><br>
                 <label for="decimal">Introduzca un número en coma flotante</label>
             </form>
             <div class="form-horizontal">
@@ -26,16 +28,18 @@
                 </div>
             </div>
             <form>
-                <button class="custom-button2">Convertir</button><br>
+                <button class="custom-button">Convertir</button><br>
                 <label for="decimal">Número decimal</label>
                 <input type="text" id="decimal" disabled>
                 <br>
                 <label for="decimal">Número binario</label>
-                <input type="number" id="binario" disabled><br>
+                <input type="text" id="binario" disabled><br>
                 <label for="decimal">Resultado en número real</label>
-                <input type="number" id="notacion" disabled>
-                <button class="custom-button2">Limpiar</button>
-                <RouterLink to="/" class="custom-button2">Salir</RouterLink>
+                <input type="text" id="notacion" disabled>
+                <div class="form-buttons">
+                    <button class="custom-button">Limpiar</button>
+                    <RouterLink to="/" class="custom-button">Salir</RouterLink>
+                </div>
             </form>
         </div>
 

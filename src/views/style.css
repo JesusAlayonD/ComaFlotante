@@ -16,7 +16,7 @@ h1 {
     font-family: 'Poppins', sans-serif;
     font-weight: 900;
     /* Aumenta el grosor del texto */
-    font-size: 2em;
+    font-size: 2.5em;
     /* Tamaño de fuente grande */
     text-align: center;
     text-transform: uppercase;
@@ -25,25 +25,6 @@ h1 {
     /* Espaciado entre letras */
     margin-bottom: 20px;
     position: relative;
-}
-
-h1::before,
-h1::after {
-    content: "";
-    position: absolute;
-    width: 50px;
-    height: 5px;
-    background-color: transparent;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-h1::before {
-    left: 0;
-}
-
-h1::after {
-    right: 0;
 }
 
 h2 {
@@ -118,9 +99,9 @@ form {
     justify-content: center;
     width: 100%;
     /* O usa un valor en píxeles como 300px */
-    max-width: 400px;
+    max-width: 500px;
     /* Asegura que ambos formularios tengan el mismo tamaño máximo */
-    margin: 0 auto;
+    margin: 5px auto;
     /* Centra los formularios horizontalmente */
     padding: 5px;
     box-sizing: border-box;
@@ -151,11 +132,26 @@ form {
 .converter-wrapper {
     background-color: #2b2b2b;
     border-radius: 10px;
-    padding: 20px;
-    max-width: 500px;
+    padding: 10px 20px;
+    max-width: 800px;
     width: 100%;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
     box-sizing: border-box;
+    margin: 30px 0px;
+}
+
+.converter-wrapper input {
+    background-color: #333;
+    border: 2px solid #444;
+    border-radius: 5px;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.2em;
+    padding: 10px;
+    margin-top: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
 }
 
 
@@ -168,9 +164,9 @@ form {
     font-family: 'Poppins', sans-serif;
     font-size: 1.2em;
     font-weight: 700;
-    padding: 15px 20px;
-    margin-top: 20px;
-    width: 100%;
+    padding: 5px 10px;
+    margin: 0px 30px;
+    width: auto;
     text-align: center;
     text-decoration: none;
     transition: background-color 0.3s ease, transform 0.2s ease;
@@ -206,11 +202,28 @@ form {
 .converter-side-a,
 .converter-side-b {
     display: inline-block;
-    width: 48%;
+    width: auto;
     box-sizing: border-box;
     margin-top: 10px;
 }
 
+.form-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Centra el contenido horizontalmente */
+    justify-content: center;
+    width: 100%;
+    gap: 10px;
+    /* O usa un valor en píxeles como 300px */
+    max-width: 500px;
+    /* Asegura que ambos formularios tengan el mismo tamaño máximo */
+    margin-top: 10px;
+    /* Centra los formularios horizontalmente */
+    padding: 5px;
+    box-sizing: border-box;
+    /* Incluye el padding dentro del ancho total */
+}
 
 @media (max-width: 600px) {
 
