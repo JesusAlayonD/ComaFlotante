@@ -141,7 +141,7 @@ function limpiarCampos() {
             </div>
             <form>
                 <div class="form-buttons">
-                    <button class="custom-button" @click="limpiarCampos">Limpiar</button>
+                    <button type="button" class="custom-button" @click="limpiarCampos">Limpiar</button>
                     <RouterLink to="/" class="custom-button">Salir</RouterLink>
                 </div>
             </form>
