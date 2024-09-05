@@ -91,7 +91,7 @@ function convertirANotacionCientifica(bin) {
     mantizaV.value = ajustarMantiza(mantiza); // Convertir la mantiza a 23 bits
 
     // Formatea la notación científica
-    return `1.${mantiza}x10^${exponente}`;
+    return `1.${mantiza}x2^${exponente}`;
 }
 
 // Función para limpiar todos los campos
