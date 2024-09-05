@@ -9,6 +9,28 @@ const signoV = ref('');
 const exponenteV = ref('');
 const mantizaV = ref('');
 
+function validarEntradaDecimal(event) {
+    const teclaPresionada = event.key;
+    const valorActual = event.target.value;
+
+    // Permitir: números (0-9), un único punto decimal (.), y teclas de control (backspace, delete, flechas)
+    const teclasPermitidas = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', '.'];
+
+    // Verificar si el carácter es un número
+    const esNumero = teclaPresionada >= '0' && teclaPresionada <= '9';
+
+    // Si la tecla presionada no es un número ni una tecla permitida, bloquearla
+    if (!esNumero && !teclasPermitidas.includes(teclaPresionada)) {
+        event.preventDefault();
+        return;
+    }
+
+    // Si se presiona un punto, evitar más de un punto decimal
+    if (teclaPresionada === '.' && valorActual.includes('.')) {
+        event.preventDefault();
+    }
+}
+
 // Función para convertir el número decimal (con parte fraccionaria) a binario
 function convertirABinario() {
     if (decimal.value) {
@@ -19,7 +41,7 @@ function convertirABinario() {
         const binEntero = parseInt(parteEntera).toString(2);
 
         // Convertir la parte fraccionaria a binario
-        const binFraccionario = convertirFraccionABinario(parteFraccionaria);
+        const binFraccionario = convertirFraccionABinario(parteFraccionaria).slice(0, 25); // Limitar a 25 bits después del punto
 
         // Unir ambas partes
         binario.value = binEntero + (binFraccionario ? '.' + binFraccionario : '');
@@ -27,9 +49,9 @@ function convertirABinario() {
         // Convertir a notación científica personalizada
         notacion.value = convertirANotacionCientifica(binario.value);
 
-        if(decimal.value>0){
+        if(decimal.value > 0){
             signoV.value = '0';
-        }else{
+        } else {
             signoV.value = '1';
         }
     }
@@ -67,31 +89,28 @@ function ajustarMantiza(mantiza) {
 }
 
 // Función para convertir el binario a notación científica personalizada
+// Función para convertir el binario a notación científica personalizada
 function convertirANotacionCientifica(bin) {
     const puntoPos = bin.indexOf('.');
     const primeraPosicion = bin.indexOf('1');
     if (primeraPosicion === -1) return '0';
 
-    // Si el punto está después del primer '1', el exponente es positivo, si no es negativo
     let mantiza, exponente;
 
     if (puntoPos === -1 || puntoPos > primeraPosicion) {
-        // Caso donde el punto decimal está a la derecha del primer '1' o no hay punto decimal
         mantiza = bin.slice(primeraPosicion + 1).replace('.', '');
         exponente = puntoPos > primeraPosicion ? puntoPos - primeraPosicion - 1 : bin.length - primeraPosicion - 1;
     } else {
-        // Caso donde el punto decimal está a la izquierda del primer '1'
         mantiza = bin.slice(primeraPosicion + 1).replace('.', '');
         exponente = primeraPosicion - puntoPos;
-        exponente = -exponente; // Exponente negativo
+        exponente = -exponente;
     }
 
-    // Ajustar exponente y mantiza
-    exponenteV.value = ajustarExponente(exponente); // Convertir el exponente ajustado a 8 bits
-    mantizaV.value = ajustarMantiza(mantiza); // Convertir la mantiza a 23 bits
+    // Ajustar mantiza y limitarla a 25 dígitos
+    mantizaV.value = ajustarMantiza(mantiza).slice(0, 25);
+    exponenteV.value = ajustarExponente(exponente);
 
-    // Formatea la notación científica
-    return `1.${mantiza}x2^${exponente}`;
+    return `1.${mantizaV.value}x2^${exponente}`;
 }
 
 // Función para limpiar todos los campos
@@ -116,7 +135,7 @@ function limpiarCampos() {
                 </RouterLink><br>
                 <label for="decimal">Introduzca el número decimal</label>
                 <div class="form-horizontal">
-                    <input type="text" id="decimal" v-model="decimal"> <button type="button" class="custom-button" @click="convertirABinario">Convertir</button>
+                    <input type="text" id="decimal" @keydown="validarEntradaDecimal" v-model="decimal"> <button type="button" class="custom-button" @click="convertirABinario">Convertir</button>
                 </div>
                 <br>
                 <label for="decimal">Número binario</label>

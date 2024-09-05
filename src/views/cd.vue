@@ -9,6 +9,15 @@ const binario = ref('');
 const notacion = ref('');
 const real = ref('');
 
+function validarEntradaBinaria(event) {
+    // Solo permitir la entrada de las teclas '0' y '1'
+    const charCode = event.which ? event.which : event.keyCode;
+    
+    if (charCode !== 48 && charCode !== 49) { // 48 es '0' y 49 es '1'
+        event.preventDefault(); // Evita que se escriban otros caracteres
+    }
+}
+
 // Función para convertir coma flotante a decimal
 function convertirAReal() {
     if (signo.value && exponente.value && mantiza.value) {
@@ -17,7 +26,9 @@ function convertirAReal() {
 
         // Convertir mantiza a notación científica
         const notacionCientifica = `1.${mantiza.value}x10^${exponenteDecimal}`;
-        notacion.value = notacionCientifica;
+        const notacionPrint = `1.${mantiza.value}x2^${exponenteDecimal}`;
+        
+        notacion.value = notacionPrint;
 
         // Convertir la notación científica a binario
         const binarioNormal = notacionCientificaANormal(notacionCientifica);
@@ -110,15 +121,15 @@ function limpiarCampos() {
             <div class="form-horizontal">
                 <div>
                     <label for="signo">Signo</label>
-                    <input type="text" size="1" id="signo" v-model="signo">
+                    <input type="text" id="signo" @keypress="validarEntradaBinaria" step="1" maxlength="1" pattern="[01]*" v-model="signo">
                 </div>
                 <div>
                     <label for="exponente">Exponente</label>
-                    <input type="text" id="exponente" v-model="exponente">
+                    <input type="text" @keypress="validarEntradaBinaria" id="exponente" step="1" maxlength="8" pattern="[01]*" v-model="exponente">
                 </div>
                 <div>
                     <label for="mantiza">Mantiza</label>
-                    <input type="text" id="mantiza" v-model="mantiza">
+                    <input type="text" @keypress="validarEntradaBinaria" id="mantiza" step="1" maxlength="23" pattern="[01]*" v-model="mantiza">
                 </div>
             </div>
             <form>
