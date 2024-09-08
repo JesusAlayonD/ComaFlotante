@@ -6,7 +6,7 @@ import { RouterLink, RouterView } from 'vue-router'
 <template>
     <div class="container">
 
-        <div class="converter-wrapper">
+        <div class="converter-wrapper-home">
             <form name="property_form">
                 <h1>Conversión de Coma Flotante de 32 bits<br>IEEE 754</h1>
                 <br>

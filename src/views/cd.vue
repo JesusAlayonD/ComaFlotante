@@ -108,7 +108,7 @@ function limpiarCampos() {
 </script>
 
 <template>
-    <div class="">
+    <div class="container">
 
         <div class="converter-wrapper">
             <form name="property_form">
@@ -118,29 +118,31 @@ function limpiarCampos() {
                 <RouterLink to="/infocd" class="custom-button">¿Cómo funciona la prueba?</RouterLink><br>
                 <label for="decimal">Introduzca un número en coma flotante</label>
             </form>
-            <div class="form-horizontal">
-                <div>
-                    <label for="signo">Signo</label>
-                    <input type="text" id="signo" @keypress="validarEntradaBinaria" step="1" maxlength="1" pattern="[01]*" v-model="signo">
-                </div>
-                <div>
-                    <label for="exponente">Exponente</label>
-                    <input type="text" @keypress="validarEntradaBinaria" id="exponente" step="1" maxlength="8" pattern="[01]*" v-model="exponente">
-                </div>
-                <div>
-                    <label for="mantiza">Mantiza</label>
-                    <input type="text" @keypress="validarEntradaBinaria" id="mantiza" step="1" maxlength="23" pattern="[01]*" v-model="mantiza">
+            <div class="converter-w">
+                <div class="form-horizontal">
+                    <div>
+                        <label for="signo">Signo</label>
+                        <input type="text" id="signo" @keypress="validarEntradaBinaria" step="1" maxlength="1" pattern="[01]*" v-model="signo">
+                    </div>
+                    <div>
+                        <label for="exponente">Exponente</label>
+                        <input type="text" @keypress="validarEntradaBinaria" id="exponente" step="1" maxlength="8" pattern="[01]*" v-model="exponente">
+                    </div>
+                    <div>
+                        <label for="mantiza">Mantiza</label>
+                        <input type="text" @keypress="validarEntradaBinaria" id="mantiza" step="1" maxlength="23" pattern="[01]*" v-model="mantiza">
+                    </div>
                 </div>
             </div>
             <form>
                 <button type="button" class="custom-button" @click="convertirAReal">Convertir</button><br>
                 <label for="notacion">Notación científica</label>
-                <input type="text" id="notacion" v-model="notacion" disabled><br>
+                <input type="text" id="notacion" class="input-data" v-model="notacion" disabled><br>
                 <label for="binario">Número binario</label>
-                <input type="text" id="binario" v-model="binario" disabled>
+                <input type="text" id="binario" v-model="binario" class="input-data" disabled>
                 <br>
                 <label for="real">Resultado en número real</label>
-                <input type="text" id="real" v-model="real" disabled>
+                <input type="text" id="real" v-model="real" class="input-res" disabled>
                 <div class="form-buttons">
                     <button type="button" class="custom-button" @click="limpiarCampos">Limpiar</button>
                     <RouterLink to="/" class="custom-button">Salir</RouterLink>

@@ -14,7 +14,7 @@ function validarEntradaDecimal(event) {
     const valorActual = event.target.value;
 
     // Permitir: números (0-9), un único punto decimal (.), y teclas de control (backspace, delete, flechas)
-    const teclasPermitidas = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', '.'];
+    const teclasPermitidas = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', '.', '-'];
 
     // Verificar si el carácter es un número
     const esNumero = teclaPresionada >= '0' && teclaPresionada <= '9';
@@ -47,7 +47,7 @@ function convertirABinario() {
         binario.value = binEntero + (binFraccionario ? '.' + binFraccionario : '');
         
         // Convertir a notación científica personalizada
-        notacion.value = convertirANotacionCientifica(binario.value);
+        convertirANotacionCientifica(binario.value);
 
         if(decimal.value > 0){
             signoV.value = '0';
@@ -83,12 +83,20 @@ function ajustarExponente(exponente) {
     return exponenteAjustado.padStart(8, '0'); // Completar con ceros si tiene menos de 8 bits
 }
 
-// Función para ajustar la mantiza a 23 dígitos
+// Función para ajustar la mantiza a un máximo de 23 dígitos
 function ajustarMantiza(mantiza) {
-    return mantiza.padEnd(23, '0').slice(0, 23); // Completar con ceros o cortar a 23 bits
+    return mantiza.slice(0, 23); // Cortar a 23 bits sin completar con ceros
 }
 
-// Función para convertir el binario a notación científica personalizada
+function ajustarMantizaNotacion(mantiza) {
+    return mantiza.slice(0, 23); // Cortar a 23 dígitos sin completar con ceros
+}
+
+// Función para ajustar la mantiza final (completar a 23 dígitos con ceros)
+function ajustarMantizaFinal(mantiza) {
+    return mantiza.padEnd(23, '0').slice(0, 23); // Completar con ceros hasta 23 dígitos si es necesario
+}
+
 // Función para convertir el binario a notación científica personalizada
 function convertirANotacionCientifica(bin) {
     const puntoPos = bin.indexOf('.');
@@ -106,11 +114,14 @@ function convertirANotacionCientifica(bin) {
         exponente = -exponente;
     }
 
-    // Ajustar mantiza y limitarla a 25 dígitos
-    mantizaV.value = ajustarMantiza(mantiza).slice(0, 25);
-    exponenteV.value = ajustarExponente(exponente);
+    // Ajustar la mantiza de notación científica (sin ceros adicionales)
+    notacion.value = `1.${ajustarMantizaNotacion(mantiza)}x2^${exponente}`;
 
-    return `1.${mantizaV.value}x2^${exponente}`;
+    // Ajustar la mantiza final a exactamente 23 dígitos (completar con ceros si es necesario)
+    mantizaV.value = ajustarMantizaFinal(mantiza);
+    
+    // Ajustar exponente
+    exponenteV.value = ajustarExponente(exponente);
 }
 
 // Función para limpiar todos los campos
@@ -124,7 +135,7 @@ function limpiarCampos() {
 }
 </script>
 <template>
-    <div class="">
+    <div class="container">
 
         <div class="converter-wrapper">
             <form name="property_form">
@@ -134,28 +145,31 @@ function limpiarCampos() {
                 <RouterLink to="/infodc" class="custom-button">¿Cómo funciona la prueba?
                 </RouterLink><br>
                 <label for="decimal">Introduzca el número decimal</label>
-                <div class="form-horizontal">
-                    <input type="text" id="decimal" @keydown="validarEntradaDecimal" v-model="decimal"> <button type="button" class="custom-button" @click="convertirABinario">Convertir</button>
+                <div class="input-dc">
+                    <input type="text" id="decimal" @keydown="validarEntradaDecimal" v-model="decimal">
                 </div>
+                <button type="button" class="custom-button" @click="convertirABinario">Convertir</button>
                 <br>
                 <label for="decimal">Número binario</label>
-                <input type="text" id="binario" v-model="binario" disabled><br>
+                <input class="input-data" type="text" id="binario" v-model="binario" disabled><br>
                 <label for="decimal">Notación científica</label>
-                <input type="text" id="notacion" v-model="notacion" disabled>
+                <input class="input-data" type="text" id="notacion" v-model="notacion" disabled>
             </form>
             <label>Resultado en Coma Flotante</label>
-            <div class="form-horizontal">
-                <div>
-                    <label for="signo">Signo</label>
-                    <input type="text" id="signo" v-model="signoV" disabled>
-                </div>
-                <div>
-                    <label for="exponente">Exponente</label>
-                    <input type="text" id="exponente" v-model="exponenteV" disabled>
-                </div>
-                <div>
-                    <label for="mantiza">Mantiza</label>
-                    <input type="text" id="mantiza" v-model="mantizaV" disabled>
+            <div class="converter-w">
+                <div class="form-horizontal">
+                    <div>
+                        <label for="signo">Signo</label>
+                        <input type="text" id="signo" v-model="signoV" disabled>
+                    </div>
+                    <div>
+                        <label for="exponente">Exponente</label>
+                        <input type="text" id="exponente" v-model="exponenteV" disabled>
+                    </div>
+                    <div>
+                        <label for="mantiza">Mantiza</label>
+                        <input type="text" id="mantiza" maxlength="23" v-model="mantizaV" disabled>
+                    </div>
                 </div>
             </div>
             <form>

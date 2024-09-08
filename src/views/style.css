@@ -41,12 +41,18 @@ img {
     padding: 5px 0px;
 }
 
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .form-horizontal {
     display: flex;
     flex-wrap: nowrap;
-    /* Asegura que los elementos no se envuelvan a la siguiente línea */
-    gap: 20px;
-    /* Espacio entre los divs */
+    justify-content: space-between;
+    /* Distribuye espacio entre los divs */
     max-width: 100%;
     margin: 0px;
     padding: 10px;
@@ -55,13 +61,11 @@ img {
 .form-horizontal div {
     display: flex;
     flex-direction: column;
-    /* Elimina la expansión para ajustar al contenido */
-    flex: 0 1 auto;
-    /* Flex-grow: 0, Flex-shrink: 1, Flex-basis: auto */
-    min-width: 0;
-    /* Asegura que el contenido pueda reducirse si es necesario */
-    width: auto;
-    /* Ajusta el tamaño basado en el contenido */
+    flex: 1;
+    /* Permite que los divs se expandan para llenar el espacio disponible */
+    margin: 0 10px;
+    /* Espacio entre los divs, ajustable según necesidad */
+    /* Elimina el tamaño fijo y usa flex-grow para que se ajusten al espacio disponible */
 }
 
 .form-horizontal label {
@@ -82,6 +86,11 @@ img {
     padding: 10px;
     box-sizing: border-box;
     width: 100%;
+}
+
+.input-dc {
+    width: 60%;
+    margin-bottom: 10px;
 }
 
 #signo {
@@ -116,7 +125,7 @@ form {
 
 .converter-w {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     /* Espacio uniforme entre los divs */
     align-items: center;
     /* Alinea verticalmente si es necesario */
@@ -145,18 +154,37 @@ form {
     margin: 30px 0px;
 }
 
+.converter-wrapper-home {
+    background-color: #2b2b2b;
+    border-radius: 10px;
+    padding: 10px 20px;
+    max-width: 800px;
+    width: 100%;
+    min-width: 80%;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+    box-sizing: border-box;
+    margin: 30px 0px;
+}
+
 .converter-wrapper input {
     background-color: #333;
     border: 2px solid #444;
     border-radius: 5px;
     color: #fff;
     font-family: 'Poppins', sans-serif;
-    font-size: 1.2em;
     padding: 10px;
     margin-top: 10px;
     width: 100%;
     box-sizing: border-box;
     text-align: center;
+}
+
+.input-data {
+    font-size: 1.2em;
+}
+
+.input-res {
+    font-size: 1.2em;
 }
 
 
@@ -237,4 +265,88 @@ form {
         width: 100%;
     }
 
+}
+
+/* Responsividad */
+@media (max-width: 1024px) {
+    .converter-wrapper {
+        max-width: 100%;
+    }
+
+    .form-horizontal div {
+        margin-top: 5px;
+    }
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2em;
+    }
+
+    .converter-wrapper-home {
+        width: 90%;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    .converter-side-a,
+    .converter-side-b {
+        max-width: 100%;
+    }
+
+    .custom-button {
+        font-size: 1em;
+        padding: 5px;
+        margin: 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 1.5em;
+    }
+
+    h2 {
+        font-size: 1.2em;
+    }
+
+    .form-horizontal {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        /* Dos columnas de igual tamaño */
+        gap: 5px;
+        max-width: 100%;
+        margin: 0;
+        padding: 10px;
+
+    }
+
+
+
+    .form-horizontal>div:nth-child(3) {
+        grid-column: 1 / -1;
+        /* Hacer que el tercer div ocupe toda la fila */
+    }
+
+    .custom-button,
+    .custom-button2 {
+        width: 50%;
+        font-size: 0.9em;
+        padding: 8px;
+    }
+
+    .converter-wrapper {
+        padding: 10px;
+        margin: 20px 0;
+    }
+
+    .input-data {
+        font-size: 1em;
+    }
 }
